@@ -1,42 +1,51 @@
-document.addEventListener('DOMContentLoaded', function(){
-    const botaoDeAcessibilidade = document.getElementById('botao-acessibilidade');
-    const opcoesDeAcessibilidade = document.getElementById('opcoes-acessibilidade');
+/* Definindo o modo normal */
+body {
+    background-color: white;
+    color: black;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+}
 
-    // Abre/fecha o menu de acessibilidade
-    botaoDeAcessibilidade.addEventListener('click', function () {
-        botaoDeAcessibilidade.classList.toggle('rotacao-botao');
-        opcoesDeAcessibilidade.classList.toggle('apresenta-lista');
+/* Modo de alto contraste */
+body.alto-contraste {
+    background-color: black;
+    color: white;
+}
 
-        const botaoSelecionado = botaoDeAcessibilidade.getAttribute('aria-expanded') === 'true';
-        botaoDeAcessibilidade.setAttribute('aria-expanded', !botaoSelecionado);
-    });
+/* Estilos dos botões */
+#alterna-contraste, #aumentar-fonte, #diminuir-fonte {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    transition: transform 0.2s ease, background-color 0.3s;
+}
 
-    // Controle de tamanho de fonte
-    let tamanhoAtualFonte = 1;
+#alterna-contraste:hover, #aumentar-fonte:hover, #diminuir-fonte:hover {
+    background-color: #dcdcdc;
+}
 
-    document.getElementById('aumentar-fonte').addEventListener('click', function(){
-        tamanhoAtualFonte = Math.min(2, tamanhoAtualFonte + 0.1);
-        document.body.style.fontSize = `${tamanhoAtualFonte}rem`;
-    });
+#alterna-contraste.ativo {
+    transform: rotate(180deg);
+}
 
-    document.getElementById('diminuir-fonte').addEventListener('click', function(){
-        tamanhoAtualFonte = Math.max(0.8, tamanhoAtualFonte - 0.1);
-        document.body.style.fontSize = `${tamanhoAtualFonte}rem`;
-    });
+#botao-acessibilidade {
+    /* Estilo do botão de menu de acessibilidade */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-    // Alterna contraste
-    const alternaContraste = document.getElementById('alterna-contraste');
-    alternaContraste.addEventListener('click', function(){
-        // Alterna a classe de alto contraste no body
-        document.body.classList.toggle('alto-contraste');
-        
-        // Adiciona ou remove a classe 'ativo' do botão para indicar o estado
-        alternaContraste.classList.toggle('ativo');
-    });
+/* Estilos adicionais para visualização */
+#opcoes-acessibilidade {
+    display: none;
+    list-style: none;
+}
 
-    // ScrollReveal para animações
-    ScrollReveal().reveal('#inicio', { delay: 500 });
-    ScrollReveal().reveal('#tropicalia', { delay: 500 });
-    ScrollReveal().reveal('#galeria', { delay: 500 });
-    ScrollReveal().reveal('#contato', { delay: 500 });
-});
+#opcoes-acessibilidade.apresenta-lista {
+    display: block;
+}
